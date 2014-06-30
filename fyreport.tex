@@ -7,9 +7,11 @@
 \usepackage{color}
 \usepackage{url}
 
+%Your first-year report. This should be a formal description of the aims of your work, including the context and background to your chosen science area, as well as describing the work you have personally done to date, and a summary and outline of how you expect your thesis project to develop.  It should be less than 5000 words, and we recommend that you write this using latex, formatted in a similar style to a journal publication.  However, we do not simply want a paper or draft paper - this must be a more general description that shows the background of your work and the future direction of your thesis plan.
+
 \begin{document}
-\title[The Star Formation History of the Green Valley]{Galaxy Zoo: Evidence for Diverse Star Formation Histories through the Green Valley}
-\author[Smethurst et al. 2014]{R. ~J. ~Smethurst,$^1$
+\title[Galaxy Zoo \& the Green Valley]{Galaxy Zoo \& the Green Valley}
+\author[Smethurst et al. 2014]{R. ~J. ~Smethurst$^1$
 \\ $^1$ Oxford Astrophysics, Department of Physics, University of Oxford, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, UK }
 
 \maketitle
@@ -45,15 +47,288 @@ Late-type ($p_s \geq 0.8$)  & \begin{tabular}[c]{@{}c@{}}51470\\ (40.9\%)\end{ta
 \label{subs}
 \end{table*}
 
-Through this approach, we aim to determine the following:
-\begin{enumerate}
-\item What previous star formation history (SFH) causes a galaxy to reside in the green valley at the current epoch?
-\item Why is the green valley so sparsely populated?
-\item Is the green valley a transitional or static population? 
-\item If the green valley is a transitional population then how many routes through it are there? 
-\item Are there morphological dependant differences between these routes through the green valley? 
-\end{enumerate}
+%Through this approach, we aim to determine the following:
+%\begin{enumerate}
+%\item What previous star formation history (SFH) causes a galaxy to reside in the green valley at the current epoch?
+%\item Why is the green valley so sparsely populated?
+%\item Is the green valley a transitional or static population? 
+%\item If the green valley is a transitional population then how many routes through it are there? 
+%\item Are there morphological dependant differences between these routes through the green valley? 
+%\end{enumerate}
 
-This report proceeds as follows. Section \ref{data} contains a description of the sample data, which is used in the Bayesian analysis of an exponentially declining star formation history model, all described in Section \ref{models}. Section \ref{results} contains the results produced by this analysis, with Section \ref{diss} providing a detailed discussion of the results obtained. We also conclude our findings in Section \ref{conc}. The zero points of all ugriz magnitudes are in the AB system and where necessary we adopt the WMAP Seven-Year Cosmological parameters \citep{WMAP} with $(\Omega_m, \Omega_{\lambda}, h) = (0.26, 0.73, 0.71)$. 
+%This report proceeds as follows. Section \ref{data} contains a description of the sample data, which is used in the Bayesian analysis of an exponentially declining star formation history model, all described in Section \ref{models}. Section \ref{results} contains the results produced by this analysis, with Section \ref{diss} providing a detailed discussion of the results obtained. We also conclude our findings in Section \ref{conc}. 
+The zero points of all ugriz magnitudes are in the AB system and where necessary we adopt the WMAP Seven-Year Cosmological parameters \citep{WMAP} with $(\Omega_m, \Omega_{\lambda}, h) = (0.26, 0.73, 0.71)$. 
+
+\section{Data and Models}
+
+\subsection{Galaxy Zoo}
+In this investigation we utilise visual classifications of galaxy morphologies from the Galaxy Zoo 2\footnote{\url{http://zoo2.galaxyzoo.org/}} citizen science project \citep{GZ2}, which obtains multiple independent classifications for each galaxy image; for which the full question tree for each image is shown in Figure 1 of \citet{GZ2}.  
+
+Specifically, the Galaxy Zoo 2 (GZ2) project consists of $304, 022$ images from the SDSS DR8 (a subset of those classified in Galaxy Zoo 1; GZ1) all classified by \emph{at least} 17 independent users, with the mean number of classifications standing at $\sim42$.
+%The GZ2 sample is more robust than the GZ1 sample and provides more detailed morphological classifications, including features such as bars, the number of spiral arms and the ellipticity of smooth galaxies. It is for these reasons we use the GZ2 sample, as opposed to the GZ1, allowing for further investigation of specific galaxy classes in the future (see Section \ref{future}). 
+The only further selection that was made to the sample was for the removal of  objects considered to be stars or artefacts by the users (i.e. with $p_{star/artefact} ~\geq~ 0.8$). Further to this, we required NUV photometry from the GALEX survey, within which $\sim42\%$ of the GZ2 sample were observed, giving a total sample size of $126, 316$ galaxies. 
+
+%The first task asks users to chose whether a galaxy is mostly smooth, is featured or is a star/artefact. Unlike other tasks further down in the decision tree, every user who classifies a galaxy image will complete this task (others, such as whether the galaxy has a bar, is dependent on a user having first classified it as a featured galaxy), therefore we have very statistically robust classifications at this level.
+
+The classifications from users produces a vote fraction for each galaxy (the debiased fractions calculated by \citet{GZ2} were used in this investigation); for example if 80 of 100 people thought a galaxy was disc shaped, whereas 20 out of 100 people thought the same galaxy was smooth in shape (i.e. elliptical), that galaxy would have vote fractions $p_{s} = 0.2$ and $p_{d} = 0.8$. In this example this galaxy would be included in the \emph{`clean'} disc sample ($p_d \geq 0.8$) according to \cite{GZ2} and would be considered a late-type galaxy. These vote fractions allow each galaxy to be considered in a large statistical analysis of how smooth and disc galaxies differ in their SFHs; the like of which has not been possible prior to this investigation.
+
+\begin{figure}
+\centering{
+\includegraphics[width=0.45\textwidth]{col_mag_with_GV.pdf}}
+\caption{Colour-magnitude diagram for the Galaxy Zoo 2 population showing the definition between the blue cloud and the red sequence from \citet{Baldry04} with the dashed line. The solid lines show $\pm 1\sigma$ either side of this definition; any galaxy within the boundary of these two solid lines is considered a green valley galaxy.}
+\label{CMGV}
+\end{figure}
+
+To define which of our sample of $126, 316$ galaxies were in the green valley, we used the definition between the red sequence and blue cloud outlined in \citet{Baldry04} in their equation 11 as:
+\begin{equation}
+C'_{ur}(M_{r}) = 2.06 - 0.244 \tanh \left( \frac{M_r + 20.07}{1.09}\right)
+\end{equation}
+and is shown in Figure \ref{CMGV} by the dashed line. Any galaxy within $\pm 1\sigma$ of this line, shown by the solid lines in Figure \ref{CMGV}, is considered a green valley galaxy. The decomposition of our sample into red sequence, green valley and blue cloud galaxies is shown in Table \ref{subs} along with further subsections by galaxy type. This table also defines the definitions we adopt henceforth for early-type ($p_s~ \geq~0.8$), late-type ($p_d~ \geq~0.8$), smooth-like ($p_s~ >~0.5$) and disc-like ($p_d~ >~0.5$) galaxies. 
+
+
+\subsection{Quenching Models}
+The star formation history (SFH) of a galaxy can be modelled as an exponentially declining star formation rate (SFR) across cosmic time ($0 \leq t ~\rm{[Gyr]} \leq 13.8$) as:
+\begin{equation}
+SFR = 
+\begin{cases}
+c_{SFR} & \text{if } t < t_q \\
+c_{SFR} \times exp{\left( \frac{-(t-t_{q})}{\tau}\right)} & \text{if } t > t_q 
+\end{cases}
+\end{equation}
+where $t_{q}$ is the onset time of quenching, $\tau$ is the timescale over which the quenching occurs and $c_{SFR}$ is an initial constant star formation rate. We assume all galaxies formed at a time $t=0~\rm{Gyr}$ with an initial burst of star formation, the mass of which is set by $c_{SFR}$. A smaller $\tau$ value corresponds to a rapid quench, whereas a larger $\tau$ value corresponds to a slower quench.  
+
+The constant star formation rate is set using \citet{Peng}, who defined a relation (in their equation 1) between the average SFR and cosmic time as:
+\begin{equation}
+sSFR(m,t) = 2.5 \left( \frac{m}{10^{10} M_{\odot}} \right)^{-0.1} \left(\frac{t}{3.5}\right)^{-2.2} \rm{Gyr}^{-1}.
+\end{equation}
+Beyond $z \sim 2$ the characteristic SFR flattens and is roughly constant back to $z\sim6$. The cause for this change is not well understood but can be seen across similar observational data \citep{Peng, Gonzalez, Beth}. Motivated by these observations, we take the relation as defined in \citet{Peng} up to a cosmic time of $t=3~\rm{Gyr} (z \sim 2.3)$ and prior to this assume a constant average SFR (see Figure \ref{sfr_mass_col}). At the point of quenching, $t_{q}$, the models are defined to have a SFR which lies on this relationship for the sSFR, for a galaxy with mass, $M = 10^{10.27} M_{\odot}$ (the average mass of the GZ2 sample; see Figure \ref{sfr_mass_col}), thereby setting the value of $c_{SFR}$ to this value.
+ 
+%Under these assumptions the average SFR of our models will result in a lower value than the relation defined in \citet{Peng} at all cosmic times with this treatment; each galaxy only resides on the `main sequence' at the point of quenching. However galaxies cannot remain on the `main sequence' from early to late times throughout their entire lifetimes given the unphysical stellar masses and SFRs this would result in at the current epoch in the local Universe \citep{Beth, Heinis14}. If we were to include prescriptions for no quenching, starbursts, mergers, AGN etc. into our models we would improve on our reproduction of the average SFR across cosmic time; however in the interest of Occam's razor \citep{Sivia, Sok02} we have focussed on the simplest model possible.
+
+Once this evolutionary SFR is obtained, we convolve it with the \citet{BC03} population synthesis models to generate a model SED at each time step. We suppress the fluxes from stars younger than $3~Myr$ to mimic the effect of birth clouds (as in S14), then apply filter transmission curves to obtain AB magnitudes and therefore colours. The right panel of Figure \ref{sfr_mass_col} shows the evolution of these colours from the point of quenching onwards in the optical-NUV colour space.
+
+Given that we have information about these modelled populations across all cosmic time, we can \emph{`observe'} these model stellar populations at a given time in their history; therefore, if the models were real populations, this would correlate with a measurable redshift. This `observed' time $t^{obs}$ can be thought of as a galaxy's age, as we make the assumption that all galaxies form with an initial burst of star formation at $t=0$. Therefore, for the GZ2 sample, the observed redshift was used to calculate the assumed age of each galaxy, in order to compare the observed colours to the predicted models colours directly. 
+
+\subsection{Bayesian Techniques}
+In order to achieve robust conclusions we conduct a a fully Bayesian analysis \citep{Sivia, MacKay} of our SFH models in comparison to the observed GZ2 sample data. This approach requires consideration of all possible combinations of $\theta \equiv (t_{q}, \tau)$. %which will be distributed with a mean, $\mu$ and standard deviation, $\sigma$, so that:
+%\begin{equation}
+%w = (\mu_{\theta}, \sigma_{\theta}) = (\mu_{t_{q}}, \sigma_{t_{q}}, \mu_{\tau}, \sigma_{\tau})
+%\end{equation}
+%Defining the Bayesian probability for a combination of $\theta$ values \underline{given} what we know about $w$: $P(\theta|w) = P(t_{q}, \tau|w) = P(t_{q}|w)P(\tau|w)$, gives:
+%\begin{multline}\label{prior}
+%P(\theta|w) = \frac{1}{\sqrt[]{4\pi^2\sigma^2_{t_{q}}\sigma^2_{\tau}}} \exp\left[-\frac{(t_{q}-\mu_{t_{q}})^2}{2\sigma^2_{t_{q}}}\right] \\ \exp\left[-\frac{(\tau-\mu_{\tau})^2}{2\sigma^2_{\tau}}\right].
+%\end{multline}
+%Here we assume that $ P(t_{q}|w)$ and $P(\tau|w)$ are independent of each other, as we have no prior knowledge of how these two parameters are related. Perhaps if we were to investigate a specific mechanism, for which we knew the quenching timescale and the epoch at which it is most common then we may assume otherwise. However, since we are attempting to investigate quenching mechanisms as a whole we make the simplest assumption for our prior and take a broad Gaussian distribution across both parameter spaces. 
+
+The likelihood of all of the GZ2 data ($\underline{d}$) \underline{given} a SFH model, i.e. a single combination of $\theta$ values, $P(\underline{d}|\theta, t_{k}^{obs})$ is then:
+\begin{equation}
+P(\underline{d}|\theta, t_{k}^{obs}) = \prod_{k} P(d_{k}|\theta, t_{k}^{obs}),
+\end{equation}
+where $d_{k}$ is a single data point of one galaxy. Assuming that all galaxies formed at $t=0~\rm{Gyr}$ with an initial burst of star formation, we can assume that the `age' of each galaxy in the GZ2 sample is equivalent to an observed time, $t^{obs}_{k}$ (see Section \ref{class}). We then use this  `age' to calculate the predicted model colours at this cosmic time for a given combination of $\theta$: $d_{c,p}(\theta, t^{obs}_{k})$ for both optical $(c=opt)$ and NUV $(c=NUV)$ colours. We can now directly compare our model colours with the observed GZ2 galaxy colours, so that for a single galaxy k with optical ($u-r$) colour, $d_{opt, k}$ and NUV ($NUV-u$) colour, $d_{NUV,k}$, the Bayesian probability $P(d_{k}|\theta, t^{obs}_{k})$:
+
+
+\begin{multline}\label{like}
+P(d_{k}|\theta, t^{obs}_{k}) = \frac{1}{\sqrt{2\pi\sigma_{opt, k}^2}}\frac{1}{\sqrt{2\pi\sigma_{NUV, k}^2}} \\ \exp{\left[ - \frac{(d_{opt, k} - d_{opt, p}(\theta, t_{k}^{obs}))^2}{\sigma_{opt, k}^2} \right]} \\ \exp{\left[ - \frac{(d_{NUV, k} - d_{NUV, p}(\theta, t_{k}^{obs}))^2}{\sigma_{NUV, k}^2} \right]},
+\end{multline}
+
+We have assumed that $P(d_{opt}|\theta, t^{obs}_{k})$ and $P(d_{NUV}|\theta, t^{obs}_{k})$ are independent of each other.
+%as with $t$ and $\tau$ in Equation \ref{prior}. As previously we do not believe we can set a sensible prior to these parameters unless we were to investigate a specific quenching mechanism.
+%
+%Equation \ref{like} gives us the probability of the data \underline{given} a specific model. However what we need is the probability of each combination of $\theta$ values \underline{given} the GZ2 data: $P(\theta|\underline{d}, t^{obs}, w)$, i.e. how likely is a single SFH model given the observed colours of all of the GZ2 galaxies. We can find this by:
+We can then calculate the posterior function from this likelihood, where $P(\theta)$ is the assumed prior which we have assumed to be flat across the parameter space:
+\begin{equation}\label{big}
+P(\theta|\underline{d}, t,^{obs}) = \frac{P(\underline{d}|\theta, \underline{t}^{obs})P(\theta)}{\int P(\underline{d}|\theta, \underline{t}^{obs})P(\theta) d\theta}.
+\end{equation}
+
+\begin{figure*}
+\centering{
+\includegraphics[width=0.9\textwidth]{sfr_mass_subsets.pdf}}
+\caption{A novel plot showing the star formation rate versus stellar mass diagrams for the different populations of galaxies  (top row, left to right: all galaxies, GZ2 `clean' disc and smooth galaxies; bottom row, left to right: blue cloud, green valley and red sequence galaxies). Their contributions to the star forming `sequence' (from \citet{Peng}, shown by the solid blue line with 0.3 dex scatter by the dashed lines) are shown. The green valley does appear to be a transitional population between the blue cloud and the red sequence. Detailed analysis of star formation histories can elucidate the nature of the different populations' pathways through the green valley.}
+\label{sfr_mass_sub}
+\end{figure*}
+
+
+As the denominator of Equation \ref{big} is a normalisation factor, comparison between likelihoods for two different SFH models (i.e., two different combinations of $\theta = (t_q, \tau)$) is equivalent to a comparison of the numerators. Calculation of $P(\theta|\underline{d}, \underline{t},^{obs} w)$  for any $\theta$ is possible given data for the GZ2 sample (or a sub-sample thereof). Markov Chain Monte Carlo (MCMC; \citealt{MacKay, Dan, GW10}) provides a robust comparison of the posterior function across $\theta$ values; here we choose a Python implementation of an affine invariant ensemble sampler by \cite{Dan}; \emph{emcee}.
+
+%This method allows for a speedier exploration of the parameter space by avoiding those areas with low likelihood. A large number of `walkers' are started at an initial position where the likelihood is calculated, from there they individually `jump' to a new area of parameter space. If the likelihood in this new area is greater than the original position then the `walkers' retain this position. This new position then influences the direction of the  `jumps' of other walkers.  This is repeated for the defined number of steps until the `walkers' have found the regions of highest likelihood.
+%
+%It is expected that those subsets of galaxies with large numbers will rapidly converge the \emph{`walkers'} (see Section \ref{stats}) into the regions of high likelihood without the need to explore the whole parameter space. Conversely the smaller galaxy subsets will allow a full exploration of the parameter space. It is also expected that those subsets of galaxies with narrow ranges of either NUV or optical colours will also cause the \emph{`walkers'} to converge rapidly into the regions of high likelihood without the need to explore the whole of the parameter space. This raises the issue of whether the sampling method is capable of finding multiple likelihood peaks, however the Figures in Section \ref{results} show it is capable of finding multiple peaks in both parameters. 
+
+In addition to the colours, the GZ2 data provides uniquely powerful measurements of a galaxy's morphology, therefore we utilise the user vote fractions, see Section \ref{class}. Specifically we consider how smooth-, $p_s$ or disc-like, $p_d$ a galaxy is considered by users. %If either of these fractions is over $80\%$ then the galaxy is considered to be in the `clean' smooth or disc sample according to \citet{GZ2}. 
+
+%If we ran the above sampling method on galaxies in either of the \emph{clean} samples, we would lose all the information about the intermediate galaxies and how these contribute to the likelihood of $P(\theta|\underline{d})$. It is the intermediate galaxies which are thought to be crucial to the morphological changes between early- and late-type galaxies; if this change is associated with the green valley in any way then these vote fractions contain information we wish to keep in our analysis. It was the consideration of these intermediate galaxies which was excluded from the investigation in S14.
+\begin{figure*}
+\centering{
+\includegraphics[width=\textwidth]{sfr_mass_colour_diagram.pdf}}
+\caption{Left panel: SFR against stellar mass for all the sample galaxies (shaded contours), with model galaxy trajectories shown as coloured points/lines. The SFHs of the models are shown in the middle panel, where the SFR is initially constant before quenching at time $t$ and thereafter exponentially declining with a characteristic timescale $\tau$. We set the SFR at the point of quenching to be consistent with the typical SFR of a star-forming galaxy at the quenching time, $t$ (dashed line; \citealt{Peng}). The full range of models reproduces the observed colour-colour properties of the sample (right panel); for clarity the figures show only 4 of the possible models explored in this study.}
+\label{sfr_mass_col}
+\end{figure*}
+
+We incorporate these GZ2 vote fractions  into our sampling by considering them as weights to the likelihood $P(d_{k}|\theta, t^{obs}_{k})$ to which that galaxy contributes to the posterior function. For example a galaxy which has $p_{s} = 0.9$ should carry more weight in the likelihood for the smooth galaxy model parameters than a galaxy with $p_{s} = 0.1$. 
+
+%Therefore the likelihood can now be thought of as:
+%\begin{equation}
+%P(\underline{d}|\theta, \underline{t}^{obs}) = \prod_{k} p_{k} P(d_{k}|\theta, t_{k}^{obs}),
+%\end{equation}
+%
+%where $p_{k}$ is either $p_{s}$ or $p_{d}$ for a single galaxy, k. We can then run the code with the GZ2 sample along with firstly, the $p_{s}$ vote fractions to find the most likely parameters for $\theta$ for smooth-like galaxies and secondly, with the $p_{d}$ vote fractions to find the most likely parameters for $\theta$ for disc-like galaxies. However, we find it more convenient to 
+
+We therefore perform sampling across four parameters: $\theta = (t_{s}, \tau_{s}, t_{d}, \tau_{d}) = (\theta_{s}, \theta_{d})$ so that our likelihood function becomes:
+\begin{equation}
+P(\underline{d}|\theta, \underline{t}^{obs}) = \prod_{k} \left [p_{s, k} P(d_{k}|\theta_{s}, t_{k}^{obs}) + p_{d, k} P(d_{k}|\theta_{d}, t_{k}^{obs}) \right].
+\end{equation}
+
+%The \emph{emcee} algorithm searches through the parameter space to find the region that maximises $P(\theta|\underline{d})$ to return four parameter values for $t_{s}, \tau_{s}, t_{d}$ and $\tau_{d}$. If we find that $\theta_{s} ~\sim~ \theta_{d}$ for the green valley galaxies then we can conclude that this area of the colour-magnitude diagram consists of a single population that all have a similar SFH. 
+
+The \emph{emcee} algorithm searches through the parameter space to find the mean $\theta$ value that maximises the posterior function  for a population of galaxies.The model outlined above has been coded using the \emph{Python} programming language into a package named: \emph{StarfPy} which will be made freely available online\footnote{Work in progress code can be found at github.com/rjsmethurst/starfpy}.
+
+\section{Results}
+Figure \ref{sfr_mass_sub} shows the SFR against the stellar mass for the observed GZ2 sample and the subsets of blue cloud, green valley and red sequence as well as for the `clean' disc and smooth galaxy samples (with GZ2 vote fractions of $p_d \geq 0.8$ and $p_s \geq 0.8$ respectively). The green valley galaxies are indeed a population which have either left, or begun to leave, the SFR-mass relation or have some residual star formation still occurring. 
+
+Interestingly, when we compare those galaxies which reside on the main sequence we find that the tail ends of this population (the low and high mass  galaxies) are primarily made up of smooth galaxies as opposed to disc galaxies.
+
+The left panel in Figure \ref{sfr_mass_col} shows how well our SFH models reproduce the observed relationship between the SFR and the mass of a galaxy, including how at the time of quenching they reside on the SF vs. mass relationship shown by the solid black line for a galaxy of mass, $M = 10^{10.27} M_{\odot}$.  We expect to not reproduce the relationship between the SFR and mass (as shown by the dashed lines from \citealt{Peng} in all panels) with our models as they focus entirely on quenched galaxies. 
+
+%The contour plots in Figures \ref{all}-\ref{blue_c_clean} show the regions of high likelihood for the SFH model parameters $\theta = (t, \tau)$ for both smooth- and disc-like galaxies (left and right panels respectively) when considering the different subsets of the galaxies in the GZ2 sample. These plots were produced by \emph{Starfpy} using the output of the MCMC sampling method outlined in Section \ref{stats}. A `burn-in' of 100 steps was utilised initially and then run until the `walkers' had converged to one or more likelihoods peaks. The histograms show the distribution for the individual parameters and are normalised to the same value across all the Figures in this Section. The colours in the background are provided as a reference to the predicted SFR at the average look-back time of the GZ2 sample ($t^{obs}=12.8~\rm{Gyr}$, see Figure \ref{pred}). 
+%
+%We consider how these areas of highest likelihood for each parameter change when we consider different subsets of the GZ2 sample.
+
+In this Section we refer to rapid, intermediate and slow quenching timescales which correspond to ranges of $0.0 < \tau ~\rm{[Gyr]} < 1.0$, $1.0 < \tau ~\rm{[Gyr]} < 2.0$ and $2.0 < \tau ~\rm{[Gyr]} < 3.0$ respectively. 
+
+\subsection{Early Results}
+Preliminary results were obtained for each of the subsets of the GZ2 sample for the distribution of the posterior function in parameter space. However there was some misconception 
+\begin{figure*}
+\includegraphics[width=0.4975\textwidth]{gv_smooth_clean.pdf}
+\includegraphics[width=0.4975\textwidth]{gv_disc_clean.pdf}
+\caption{For galaxies in the Galaxy Zoo 2 sample defined as clean green valley galaxies, contour and histogram plots (all normalised over the same value) show the regions of greatest likelihood for an exponential model star formation history parameters $[t_{quench}$ and $\tau_{quench}]$ for both smooth-like(left) and disc-like (right) galaxies. $t_{q}$ is the time at which quenching occurs (Gyr) and $\tau_{q}$ is the time scale on which quenching occurs (Gyr; the larger the $\tau_{q}$, the slower the quenching). Background colours show the star formation rate predicted by this model after a time $t \sim 12.8~\rm{Gyr}$, which is the average observed time of the galaxies in the GZ2 sample. Galaxies contribute  to $[t_{q}, \tau_{q}]_{smooth}$ and $[t_{q}, \tau_{q}]_{disc}$ according to their Galaxy Zoo 2 vote fraction (i.e. a galaxy with $p_{disc} \sim p_{smooth} \sim 0.5$ will contribute equally to each set of parameters).}
+\label{gv_clean}
+\end{figure*}
+
+\subsection{Recent Results}
+
+%Table of values
+%
+
+\section{Discussion}
+\subsection{Future Work}\label{future}
+Due to the flexibility of our model we believe that the \emph{StarfPy} module will have a significant number of future applications in my thesis work. Considering the number of magnitude bands available across the SDSS, further analysis will also be possible with a larger set of optical and NUV colours, providing further constraints. This analysis could also be utilised for galaxies observed at higher redshifts, for example with those galaxies classified in the GZ: Hubble Project (with Hubble Space Telescope photometry).
+
+We aim to tackle the key elements of the overarching theory of galaxy evolution by determining any differences in star formation histories for:
+\begin{enumerate}
+\item barred vs. non-barred disc galaxies
+\item merging/interacting galaxies vs. isolated galaxies
+\item fast vs. slow rotating elliptical galaxies
+\item cluster vs. field galaxies,
+\end{enumerate}
+using the more detailed GZ2 classifications and the projected neighbour density $\Sigma$, from \citet{Baldry06}. We also hope to study the distribution of the SFH parameters in each subset of the magnitude-colour diagram by running StarfPy on each individual galaxy in the sample before summing across the distributions which will be weighted by the morphological classification. 
+
+%In particular, with further use of the robust, detailed GZ2 classifications, we believe that our module will be able to distinguish if there is any statistical difference in the star formation histories of barred vs. non-barred galaxies. This will require a simple swap of $p_s$ and $p_d$ with $p_{bar}$ and $p_{no bar}$ from the available GZ2 vote fractions. We believe that this will aid in the discussion of whether bars act to quench star formation (by funnelling gas into the galaxy centre) or promote star formation (by causing an increase in gas density as it travels through the disc) both sides of which have been fiercely argued \citep{Masters11, Masters12, Sheth05, Ellison11}. 
+%
+%Further application of the \emph{StarfPy} code could be to investigate the parameters for currently merging/interacting pairs to those galaxies classified as merger remnants from their degree of disturbance. This will allow a direct comparison of the impact of a merger on the star formation rate of a galaxy by comparing the before and after scenario's. 
+%
+%It also thought that depending on the initial conditions of a galaxy merger this can either produce a slow or fast rotator elliptical galaxy. Since slow rotators are on average more massive objects that they may result from major mergers (dry) on the red sequence \citep{Em11} , whereas fast rotators are obtained in simulations from gas rich (wet) mergers and can form more disc-like objects \citep{Em07}. By using a sample of fast and slow rotators as input galaxies we may even be able to detect a difference in the star formation histories of wet and dry mergers and in turn how these two separate populations of elliptical galaxies arose. 
+%
+%One of the key elements of an overarching theory of galaxy evolution is to explain how field and cluster galaxies evolve in comparison to each other. The projected neighbour density, $\Sigma$, from \citet{Baldry06} can be used as to weight the likelihoods for cluster and field galaxies (instead of the vote fractions from GZ2 for $p_s$ and $p_d$) to determine if there is a measurable statistical difference in their star formation histories. 
+
+\subsection{Thesis Development}
+%Future work tie in with observations of bulgeless galaxies with growing black holes - mass measurements - any effect on the quenching?
+%What can we do that no one else can?
+%Future plans...
+
+\section{Conclusion}
+We have used morphological classifications from the Galaxy Zoo 2 project to determine the morphological dependant star formation histories of galaxies through a Bayesian analysis of an exponentially declining star formation rate model of quenching. We determined the most likely parameters for the quenching time, $t_q$ and quenching timescale $\tau$ in this model for galaxies across the blue cloud, green valley and red sequence to trace galactic evolution across the colour-magnitude diagram. In agreement with \citet{Sch2014} we find that the green valley is indeed a transitional population for all morphological types, however this transition proceeds slowly for the majority of disc-like galaxies and may rarely occur very rapidly for smooth-like galaxies. However, in disagreement with \citet{Sch2014} it is the intermediate quenching timescales which are the most dominant mechanism. 
+
+\begin{thebibliography}{}
+\bibitem[\protect\citeauthoryear{Aihara et al.}{2011}]{Aihara11} Aihara, H. et al., 2011, ApJSS, 193, 29
+\bibitem[\protect\citeauthoryear{Arnouts et al.}{2007}]{Arnouts07} Arnouts, S. et al., 2007, A\&A, 476, 137
+\bibitem[\protect\citeauthoryear{Baldry et al.}{2004}]{Baldry04} Baldry, I. K. et al., 2004, ApJ, 600, 681
+\bibitem[\protect\citeauthoryear{Baldry et al.}{2006}]{Baldry06} Baldry, I. K. et al., 2006, MNRAS, 373, 469
+\bibitem[\protect\citeauthoryear{Ball, Loveday \& Brunner}{2008}]{BLB08} Ball, N. M., Loveday, J. \& Brunner, R. J., 2008, MNRAS, 383, 907
+\bibitem[\protect\citeauthoryear{Bamford et al.}{2009}]{Bamford09} Bamford, S. P. et al., 2009, MNRAS, 393, 1324
+\bibitem[\protect\citeauthoryear{Barnes \& Hernquist}{1996}]{BH96} Barnes, J. E. \& Hernquist, L., 1996, ApJ, 471, 115
+\bibitem[\protect\citeauthoryear{Barnes}{2002}]{Barnes02} Barnes, J. E., 2002, MNRAS, 333, 481
+\bibitem[\protect\citeauthoryear{Bell et al.}{2004}]{Bell04} Bell, E. F. et al., 2004, ApJ, 608, 752
+\bibitem[\protect\citeauthoryear{Bell et al.}{2006}]{Bell06} Bell, E. F. et al., 2006, ApJ, 652, 270
+\bibitem[\protect\citeauthoryear{Bell et al.}{2007}]{Bell07} Bell, E. F. et al., 2007, ApJ, 663, 834
+\bibitem[\protect\citeauthoryear{B\'ethermin et al.}{2012}]{Beth} B\'ethermin, M. et al., 2012, ApJ, 757, L23
+\bibitem[\protect\citeauthoryear{Blanton et al.}{2005}]{Blanton05} Blanton, M. R. et al., 2005, AJ, 129, 2562
+\bibitem[\protect\citeauthoryear{Blanton \& Roweis}{2007}]{BR07} Blanton, M. R. \& Roweis, S., 2007, AJ, 133, 734
+\bibitem[\protect\citeauthoryear{Brammer et al.}{2009}]{Brammer09} Brammer, G. B. et al., 2009, ApJ, 706, 173
+\bibitem[\protect\citeauthoryear{Brinchmann et al.}{2004}]{Brinch04} Brinchmann, J. et al., 2004, MNRAS, 351, 1151
+\bibitem[\protect\citeauthoryear{Bruzual \& Charlot}{2003}]{BC03} Bruzual, G. \& Charlot, S., 2003, MNRAS, 344, 1000
+\bibitem[\protect\citeauthoryear{Bundy et al.}{2007}]{Bundy07} Bundy, K. et al., 2007, ApJL, 655, L5
+\bibitem[\protect\citeauthoryear{Bundy et al.}{2009}]{Bundy09} Bundy, K. et al., 2009, ApJ, 697, 1369
+\bibitem[\protect\citeauthoryear{Bundy et al.}{2010}]{Bundy10} Bundy, K. et al., 2010, ApJ, 719, 1969
+\bibitem[\protect\citeauthoryear{Cardelli et al.}{1989}]{Cardelli89} Cardelli, J. A. et al., 1989, ApJ, 345, 245
+\bibitem[\protect\citeauthoryear{Casteels et al.}{2013}]{Casteels13} Casteels, K. et al., 2013, MNRAS, 429, 1051
+\bibitem[\protect\citeauthoryear{Chabrier et al.}{2003}]{Chab03} Chabrier, G., 2003, PASP, 115, 763
+\bibitem[\protect\citeauthoryear{Chen et al.}{2010}]{Chen10} Chen, X. Y. et al., 2010, A\&A, 515, 101
+\bibitem[\protect\citeauthoryear{Conroy, Gunn \& White}{2009}]{CGW09} Conroy, C., Gunn, J. E. \& White, M. 2009, ApJ, 699, 486
+\bibitem[\protect\citeauthoryear{Darg et al.}{2010}]{Darg10a} Darg, D. et al., 2010a, MNRAS, 401, 1552
+\bibitem[\protect\citeauthoryear{Ellison et al.}{2011}]{Ellison11} Ellison, S. L. et al., 2001, MNRAS, 416, 2182
+\bibitem[\protect\citeauthoryear{Emsellem et al.}{2007}]{Em07} Emsellem, E. et al., 2007, IAU Symposium 235
+\bibitem[\protect\citeauthoryear{Emsellem et al.}{2011}]{Em11} Emsellem, E, et al., 2011, MNRAS, 414, 888
+\bibitem[\protect\citeauthoryear{Eminian et al.}{2008}]{Eminian08} Eminian, C. et al., 2008, MNRAS, 384, 930
+\bibitem[\protect\citeauthoryear{Faber et al.}{2007}]{Faber07} Faber, S. M. et al., 2007, ApJ, 665, 265
+\bibitem[\protect\citeauthoryear{Falomo et al.}{2008}]{Falomo08} Falomo, R. et al., 2008, ApJ, 673, 694
+\bibitem[\protect\citeauthoryear{Falkenberg et al.}{2009}]{Falk09} Falkenberg, M. A. et al., 2009, MNRAS, 397, 1954
+\bibitem[\protect\citeauthoryear{Foreman-Mackey et al.}{2013}]{Dan} Foreman-Mackey, D., Hogg, D. W., Lang, D., Goodman, J., 2013, PASP, 125, 306
+\bibitem[\protect\citeauthoryear{Genel et al.}{2008}]{Genel08} Genel, S. et al., 2008, ApJ, 688, 789
+\bibitem[\protect\citeauthoryear{Goodman \& Weare}{2010}]{GW10} Goodman, J. \& Weare, J., 2010, CAMCS, 5, 65
+\bibitem[\protect\citeauthoryear{Gon\c calves et al.}{2012}]{Gonc12} Gon\c calves, T. S. et al., 2012, ApJ, 759, 67
+\bibitem[\protect\citeauthoryear{Gonz\'alez et al.}{2010}]{Gonzalez} Gonz\'alez, V. et al., 2010, ApJ, 713, 115
+\bibitem[\protect\citeauthoryear{Heinis et al.}{2014}]{Heinis14} Heinis, S. et al., 2014, MNRAS, 437, 1268
+\bibitem[\protect\citeauthoryear{Hopkins}{2004}]{Hopkins04} Hopkins, A. M., 2004, ApJ, 615, 209
+\bibitem[\protect\citeauthoryear{Im et al.}{2002}]{Im02} Im, M. et al., 2002, ApJ, 571, 136
+\bibitem[\protect\citeauthoryear{Jarosik et al.}{2011}]{WMAP} Jarosik, N. et al., 2011, ApJSS, 192, 18
+\bibitem[\protect\citeauthoryear{Kauffmann et al.}{2003}]{Kauff03} Kauffman, G. et al., 2003, MNRAS, 341, 33
+\bibitem[\protect\citeauthoryear{Kaviraj et al.}{2011}]{Kav11} Kaviraj, S. et al. 2011, MNRAS, 411, 2148
+\bibitem[\protect\citeauthoryear{Kaviraj}{2014}]{Kav14} Kaviraj, S., 2014, MNRAS, 440, 2944
+\bibitem[\protect\citeauthoryear{Kormendy \& Kennicutt}{2004}]{KK04} Kormendy, J. \& Kennicutt, R. J., 2004, ARA\&A, 42, 603
+\bibitem[\protect\citeauthoryear{Kormendy et al.}{2010}]{Kormendy10} Kormendy, J. et al., 2010, ApJ, 723, 54
+\bibitem[\protect\citeauthoryear{Kriek et al.}{2010}]{Kriek10} Kriek, M. et al., 2010, ApJL, 722, L64
+\bibitem[\protect\citeauthoryear{Lintott et al.}{2011}]{Lintott11} Lintott, C. J. et al., 2011, MNRAS, 410, 166
+\bibitem[\protect\citeauthoryear{Lotz et al.}{2008}]{Lotz08} Lotz, J. et al., 2008, MNRAS, 391, 1137
+\bibitem[\protect\citeauthoryear{Lotz et al.}{2011}]{Lotz11} Lotz, J. et al., 2011, MNRAS, 742, 103
+\bibitem[\protect\citeauthoryear{MacKay}{2003}]{MacKay} MacKay, D. J. C., 2003, \emph{Information Theory, Inference and Learning Algorithms}, Cambridge University Press, ISBN 978-0-521-64298-9
+\bibitem[\protect\citeauthoryear{Marasco, Fraternali \& Binney}{2012}]{MFB12} Marasco, A., Fraternali, F. \& Binney, J. J., 2012, MNRAS, 419, 1107
+\bibitem[\protect\citeauthoryear{Maraston}{2005}]{Maraston05} Maraston, C., 2005, MNRAS, 362, 799
+\bibitem[\protect\citeauthoryear{Marigo \& Girardi}{2007}]{MG07} Marigo, P. \& Girardi, L. 2007, A\&A, 469, 239
+\bibitem[\protect\citeauthoryear{Martin et al.}{2005}]{Martin05} Martin, D. C. et al., 2005, ApJ, 619, L1
+\bibitem[\protect\citeauthoryear{Martin et al.}{2007}]{Martin07} Martin, D. C. et al., 2007, ApJS, 173, 342
+\bibitem[\protect\citeauthoryear{Masters et al.}{2010a}]{Masters10} Masters, K. L. et al., 2010, MNRAS, 405, 783
+\bibitem[\protect\citeauthoryear{Masters et al.}{2011}]{Masters11} Masters, K. L. et al., 2011, MNRAS, 411, 2026
+\bibitem[\protect\citeauthoryear{Masters et al.}{2012}]{Masters12} Masters, K. L. et al., 2012, MNRAS, 424, 2180
+\bibitem[\protect\citeauthoryear{Melbourne et al.}{2012}]{Mel12} Melbourne, J. et al., 2012, ApJ, 748, 47
+\bibitem[\protect\citeauthoryear{Mendez et al.}{2011}]{Mendez11} Mendez, A. J. et al., 2011, ApJ, 736, 110
+\bibitem[\protect\citeauthoryear{Miller, Rose \& Cecil}{2011}]{MRC11} Miller, N. A., Rose, J. A. \& Cecil, G. 2011, ApJL, 727, L15
+\bibitem[\protect\citeauthoryear{Nair \& Abraham}{2010}]{NA10} Nair, P. B. \& Abraham, R. G. 2010, ApJSS, 186, 427 
+\bibitem[\protect\citeauthoryear{Noeske et al.}{2007}]{Noeske07} Noeske, K. G. et al., 2007, ApJ, 660, L43
+\bibitem[\protect\citeauthoryear{Oh et al.}{2011}]{Oh11} Oh, K. et al., 2011, ApJS, 195, 13
+\bibitem[\protect\citeauthoryear{Padmanabhan et al.}{2008}]{Pad08} Padmanabhan, N. et al., 2008, ApJ, 674, 1217
+\bibitem[\protect\citeauthoryear{Peng et al.}{2010}]{Peng} Peng, Y. et al., 2010, ApJ, 721, 193
+\bibitem[\protect\citeauthoryear{Robertson et al.}{2006}]{Rob06} Robertson, B. et al., 2006, ApJ, 645, 986
+\bibitem[\protect\citeauthoryear{Robitaille et al.}{2013}]{Rob13} Robitaille, T. P. et al., 2013, A\&A, 558, A33
+\bibitem[\protect\citeauthoryear{Salim et al.}{2007}]{Salim07} Salim, S. et al., 2007, ApJSS, 173, 267
+\bibitem[\protect\citeauthoryear{Schawinski et al.}{2007}]{Sch07} Schawinski, et al., 2007, MNRAS, 382, 1415
+\bibitem[\protect\citeauthoryear{Schawinski et al.}{2009}]{Sch09} Schawinski, K. et al., 2009, MNRAS, 396, 818
+\bibitem[\protect\citeauthoryear{Schawinski et al.}{2014}]{Sch2014} Schawinski, K. et al., 2014 (arXiv: 1402.4814)
+\bibitem[\protect\citeauthoryear{Schiminovich et al.}{2007}]{Schim07} Schiminovich, D. et al., 2007, ApJS, 173, 315
+\bibitem[\protect\citeauthoryear{Scoville et al.}{2007}]{Scoville07} Scoville, N. et al., 2007, ApJSS, 172, 1
+\bibitem[\protect\citeauthoryear{Sheth et al.}{2005}]{Sheth05} Sheth, K. et al., 2005, ApJ, 632, 217
+\bibitem[\protect\citeauthoryear{Sheth et al.}{2012}]{Sheth12} Sheth, K. et al., 2012, ApJ, 758, 136
+\bibitem[\protect\citeauthoryear{Simmons et al.}{2013}]{Simmons13} Simmons, B. D. et al., 2013, MNRAS, 429, 2199
+\bibitem[\protect\citeauthoryear{Sivia}{1996}]{Sivia} Sivia, D. S., 1996, \emph{Data Analysis: A Bayesian Tutorial}, Oxford University Press, ISBN 0-19-851889-7
+\bibitem[\protect\citeauthoryear{Skibba et al.}{2009}]{Skibba09} Skibba, R. A. et al., 2009, MNRAS, 399, 966
+\bibitem[\protect\citeauthoryear{Springel, Di~Matteo \& Hernquist}{2005}]{Springel05} Springel, V., Di Matteo, T. \& Hernquist, L., 2005, ApJ, 620, L79
+\bibitem[\protect\citeauthoryear{Soklakov}{2002}]{Sok02} Soklakov, A. N., 2002, (arXiv:math-ph/0009007)
+\bibitem[\protect\citeauthoryear{Taylor}{2005}]{Taylor05} Taylor, M. B., 2005, ASP Conference Series, 347
+\bibitem[\protect\citeauthoryear{Tojeiro et al.}{2013}]{Toj13} Tojeiro, R. et al., 2013, MNRAS, 432, 359
+\bibitem[\protect\citeauthoryear{Willett et al.}{2013}]{GZ2} Willett, K. et al., 2014, MNRAS, 435, 2835
+\bibitem[\protect\citeauthoryear{Willmer et al.}{2006}]{Willmer06} Willmer, C. N. A. et al., 2006, ApJ, 647, 853
+\bibitem[\protect\citeauthoryear{Wyder et al.}{2007}]{Wyder07} Wyder, T. K. et al., 2007, ApJS, 173, 293
+\bibitem[\protect\citeauthoryear{York et al.}{2000}]{York00} York, D. G. et al., 2000, AJ, 120, 1579
+\end{thebibliography}{}
+
 
 \end{document}
