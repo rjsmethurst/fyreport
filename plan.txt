@@ -1,0 +1,23 @@
+PLAN
+
+INTRO:
+	- background of field
+	- background to my work
+	- what are we doing that’s novel?
+
+DATA/BAYESIAN:
+	- GZ
+	- quenching model
+	- Bayesian…
+	- MCMC
+
+RESULTS:
+	- original results
+	- explain why incorrect
+	- updated results
+
+DISCUSSION:
+	- future work with this code
+	- how does this tie in with the rest of thesis?
+	- observing + bulgeless galaxies
+
