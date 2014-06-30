@@ -193,25 +193,28 @@ The left panel in Figure \ref{sfr_mass_col} shows how well our SFH models reprod
 %
 %We consider how these areas of highest likelihood for each parameter change when we consider different subsets of the GZ2 sample.
 
-In this Section we refer to rapid, intermediate and slow quenching timescales which correspond to ranges of $0.0 < \tau ~\rm{[Gyr]} < 1.0$, $1.0 < \tau ~\rm{[Gyr]} < 2.0$ and $2.0 < \tau ~\rm{[Gyr]} < 3.0$ respectively. 
+In this Section we refer to rapid, intermediate and slow quenching timescales which correspond to ranges of $0.0 < \tau ~\rm{[Gyr]} < 1.0$, $1.0 < \tau ~\rm{[Gyr]} < 2.0$ and $2.0 < \tau ~\rm{[Gyr]} < 3.0$ respectively.
 
-\subsection{Early Results}
-Preliminary results were obtained for each of the subsets of the GZ2 sample for the distribution of the posterior function in parameter space. However there was some misconception 
 \begin{figure*}
 \includegraphics[width=0.4975\textwidth]{gv_smooth_clean.pdf}
 \includegraphics[width=0.4975\textwidth]{gv_disc_clean.pdf}
-\caption{For galaxies in the Galaxy Zoo 2 sample defined as clean green valley galaxies, contour and histogram plots (all normalised over the same value) show the regions of greatest likelihood for an exponential model star formation history parameters $[t_{quench}$ and $\tau_{quench}]$ for both smooth-like(left) and disc-like (right) galaxies. $t_{q}$ is the time at which quenching occurs (Gyr) and $\tau_{q}$ is the time scale on which quenching occurs (Gyr; the larger the $\tau_{q}$, the slower the quenching). Background colours show the star formation rate predicted by this model after a time $t \sim 12.8~\rm{Gyr}$, which is the average observed time of the galaxies in the GZ2 sample. Galaxies contribute  to $[t_{q}, \tau_{q}]_{smooth}$ and $[t_{q}, \tau_{q}]_{disc}$ according to their Galaxy Zoo 2 vote fraction (i.e. a galaxy with $p_{disc} \sim p_{smooth} \sim 0.5$ will contribute equally to each set of parameters).}
+\caption{Early (incorrect) result for galaxies in the Galaxy Zoo 2 sample defined as clean green valley galaxies, contour and histogram plots (all normalised over the same value) show the regions of greatest likelihood for an exponential model star formation history parameters $[t_{quench}$ and $\tau_{quench}]$ for both smooth-like(left) and disc-like (right) galaxies. $t_{q}$ is the time at which quenching occurs (Gyr) and $\tau_{q}$ is the time scale on which quenching occurs (Gyr; the larger the $\tau_{q}$, the slower the quenching). Background colours show the star formation rate predicted by this model after a time $t \sim 12.8~\rm{Gyr}$, which is the average observed time of the galaxies in the GZ2 sample. Galaxies contribute  to $[t_{q}, \tau_{q}]_{smooth}$ and $[t_{q}, \tau_{q}]_{disc}$ according to their Galaxy Zoo 2 vote fraction (i.e. a galaxy with $p_{disc} \sim p_{smooth} \sim 0.5$ will contribute equally to each set of parameters). These contours were interpreted as the distribution of the posterior function across the parameter space initially but proved to be the result of the `burn-in' step for MCMC methods.}
 \label{gv_clean}
 \end{figure*}
+ 
+
+\subsection{Early Results}
+Preliminary results were obtained for each of the subsets of the GZ2 sample. It was thought that the resulting contour plots shown in Figure \ref{gv_clean} for clean green valley galaxies showed distribution of the posterior function in the parameter space. However a more complete knowledge of Bayesian and MCMC methods was not obtained until attendance at the Penn State Astrostatistics Summer School in June 2014. At this point it was realised that this apparent distribution was due to the `burn-in' step of the MCMC method. Also the model compiled would never be able to return a distribution; only the mean $\theta$ parameters for a given population, which could in fact be a double peaked mean with ratio's if the population itself was bimodal. 
 
 \subsection{Recent Results}
 
 %Table of values
-%
+%Smooth & Disc plots of peak positions 
+%Discussion of meaning from results - MM, MiM & SE etc. 
 
-\section{Discussion}
-\subsection{Future Work}\label{future}
-Due to the flexibility of our model we believe that the \emph{StarfPy} module will have a significant number of future applications in my thesis work. Considering the number of magnitude bands available across the SDSS, further analysis will also be possible with a larger set of optical and NUV colours, providing further constraints. This analysis could also be utilised for galaxies observed at higher redshifts, for example with those galaxies classified in the GZ: Hubble Project (with Hubble Space Telescope photometry).
+\section{Thesis Development}
+
+Due to the flexibility of our model we believe that the \emph{StarfPy} module will have a significant number of future applications within this thesis work. Considering the number of magnitude bands available across the SDSS, further analysis will also be possible with a larger set of optical and NUV colours, providing further constraints. This analysis could also be utilised for galaxies observed at higher redshifts, for example with those galaxies classified in the GZ: Hubble Project (with Hubble Space Telescope photometry).
 
 We aim to tackle the key elements of the overarching theory of galaxy evolution by determining any differences in star formation histories for:
 \begin{enumerate}
@@ -220,7 +223,9 @@ We aim to tackle the key elements of the overarching theory of galaxy evolution 
 \item fast vs. slow rotating elliptical galaxies
 \item cluster vs. field galaxies,
 \end{enumerate}
-using the more detailed GZ2 classifications and the projected neighbour density $\Sigma$, from \citet{Baldry06}. We also hope to study the distribution of the SFH parameters in each subset of the magnitude-colour diagram by running StarfPy on each individual galaxy in the sample before summing across the distributions which will be weighted by the morphological classification. 
+using the more detailed GZ2 classifications and the projected neighbour density $\Sigma$, from \citet{Baldry06}. We also hope to study the distribution of the SFH parameters in each subset of the magnitude-colour diagram by running StarfPy on each individual galaxy in the sample before summing across the distributions which will be weighted by the morphological classification. The development of the StarfPy code into one that is fully publishable and reference-able is also a goal for the future. 
+
+The results found from this first investigation tie in well with an observing run to the INT in 2014A, with hope for more time in 2014B, to find spectra of bulgeless disc galaxies (identified by the users of GZ2) which have black holes - contradicting our theories for merger driven black hole evolution which consequently forms a bulge at the centre of a galaxy. The data reduction of these spectra will allow the determination of black hole masses for each galaxy, for which preliminary previous results showed to be comparable to the mass of the black hole in the centre of the Milky Way. These observations will help to answer the questions raised by this investigation into the green valley galaxies; how dominant is secular evolution in our Universe and do AGN cause a significant amount of quenching in galaxies?
 
 %In particular, with further use of the robust, detailed GZ2 classifications, we believe that our module will be able to distinguish if there is any statistical difference in the star formation histories of barred vs. non-barred galaxies. This will require a simple swap of $p_s$ and $p_d$ with $p_{bar}$ and $p_{no bar}$ from the available GZ2 vote fractions. We believe that this will aid in the discussion of whether bars act to quench star formation (by funnelling gas into the galaxy centre) or promote star formation (by causing an increase in gas density as it travels through the disc) both sides of which have been fiercely argued \citep{Masters11, Masters12, Sheth05, Ellison11}. 
 %
