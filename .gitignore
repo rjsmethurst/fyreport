@@ -6,5 +6,6 @@
 *.synctex.gz
 *.bst
 *.cls
-
+GV.tex
+gv_old.tex
 
