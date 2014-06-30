@@ -1,3 +1,10 @@
 *.pyc
 *.pdf
+.DS_Store
+*.aux
+*.log
+*.synctex.gz
+*.bst
+*.cls
+
 
